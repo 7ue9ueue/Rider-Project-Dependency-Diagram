@@ -1,0 +1,49 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.8.10'
+    id 'org.jetbrains.compose' version '1.4.0'
+}
+
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    google()
+    mavenCentral()
+    maven { url 'https://maven.pkg.jetbrains.space/public/p/compose/dev' }
+}
+
+dependencies {
+    implementation(compose.desktop.currentOs)
+    implementation "io.ktor:ktor-client-core:2.3.0"
+    implementation "io.ktor:ktor-client-cio:2.3.0"
+    implementation "io.ktor:ktor-client-content-negotiation:2.3.0"
+    implementation "io.ktor:ktor-serialization-kotlinx-json:2.3.0"
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// Use JDK 23 for both Java and Kotlin compilation:
+kotlin {
+    // This tells Kotlin to use a JDK 23 toolchain for compilation
+    jvmToolchain(23)
+}
+
+compose.desktop {
+    application {
+        mainClass = "MainKt"
+    }
+}
+
+// Set Kotlin and Java compile tasks to target JDK 17 or 23
+// Note: If Kotlin doesn't support jvmTarget = "23" yet, set it to "17"
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
+    kotlinOptions.jvmTarget = "17"
+}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = "17"
+    targetCompatibility = "17"
+}
