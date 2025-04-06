@@ -34,8 +34,6 @@ fun graphToPlantUML(graph: Graph): String {
     sb.appendLine("skinparam linetype ortho")
     sb.appendLine("skinparam ranksep 30")
     sb.appendLine("skinparam nodesep 20")
-
-    // Customize font (optional)
     sb.appendLine("skinparam defaultFontName Courier")
     sb.appendLine("skinparam defaultFontSize 14")
 
